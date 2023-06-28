@@ -26,14 +26,12 @@ public class RunnerController {
         return "runners";
     }
 
-    @GetMapping("/bigestshowsizerunner")
+    @GetMapping("/bigestshoesizerunner")
     public String getTheBigestShoeSizeRunner(Model model) {
         RunnerService runnerService = new RunnerService(runnerRepository);
         RunnerEntity runner = runnerRepository.findById(runnerService.getBigestShoeSizeRunnerId()).orElse(null);
         if (runner != null) {
             model.addAttribute("runner", runner);
-            int theBigestShoeSize = runner.getShoeSize();
-            model.addAttribute("theBigestShowSize", theBigestShoeSize);
             return "runner";
         } else {
             return "error";
