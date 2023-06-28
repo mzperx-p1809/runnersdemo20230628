@@ -10,11 +10,12 @@ public class RunnerEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long runnerId;
     private String runnerName;
+
+    private int shoeSize;
     private long pace;
 
     @OneToMany(mappedBy = "runner")
     private List<LapTimeEntity> laptimes = new ArrayList<>();
-
 
     public RunnerEntity() {
     }
@@ -42,6 +43,14 @@ public class RunnerEntity {
     public void setPace(long pace) {
         this.pace = pace;
     }
+
+    public int getShoeSize() {
+        return shoeSize;
+    }
+    public void setShoeSize(int shoeSize) {
+        this.shoeSize = shoeSize;
+    }
+
 
     public List<LapTimeEntity> getLaptimes() {
         return laptimes;
