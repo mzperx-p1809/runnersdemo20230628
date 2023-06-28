@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class RunnerController {
@@ -22,6 +24,20 @@ public class RunnerController {
         List<RunnerEntity> runners = runnerRepository.findAll();
         model.addAttribute("runners", runners);
         return "runners";
+    }
+
+    @GetMapping("/bigestshowsizerunner")
+    public String getTheBigestShoeSizeRunner(Model model) {
+        RunnerService runnerService = new RunnerService(runnerRepository);
+        RunnerEntity runner = runnerRepository.findById(runnerService.getBigestShoeSizeRunnerId()).orElse(null);
+        if (runner != null) {
+            model.addAttribute("runner", runner);
+            int theBigestShoeSize = runner.getShoeSize();
+            model.addAttribute("theBigestShowSize", theBigestShoeSize);
+            return "runner";
+        } else {
+            return "error";
+        }
     }
 
     @GetMapping("/runner/{id}")

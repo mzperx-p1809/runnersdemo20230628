@@ -28,4 +28,20 @@ public class RunnerService {
             return -1.0;
         }
     }
+
+    public long getBigestShoeSizeRunnerId() {
+        long bigestShoeSizeRunnerID = 0;
+        int maxShoeSize = -1;
+        List<RunnerEntity> runners = runnerRepository.findAll();
+        if (runners != null) {
+            for (RunnerEntity runner: runners) {
+                if (maxShoeSize < runner.getShoeSize()) {
+                    bigestShoeSizeRunnerID = runner.getRunnerId();
+                }
+            }
+            return bigestShoeSizeRunnerID;
+        } else {
+            return (long) -1;
+        }
+    }
 }
